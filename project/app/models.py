@@ -26,10 +26,10 @@ class Advertisement(models.Model):
     
 
 class SocialLink(models.Model):
-    name = models.CharField(50)
-    anchor_class = models.CharField(2)
-    icon_class = models.CharField(30)
-    url = models.CharField(200)
+    name = models.CharField(max_length=50)
+    anchor_class = models.CharField(max_length=2)
+    icon_class = models.CharField(max_length=30)
+    url = models.CharField(max_length=200)
 
     def __str__(self):
         return f"{self.name} ({self.icon_class})"

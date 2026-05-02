@@ -4,6 +4,7 @@ from app import views
 #this is where the routing occurs
 urlpatterns = [
     path('', views.index, name='index'),
+    path('base/', views.base, name='base.html'),
     path('movies/', views.movielist, name='movielist'),
     path('moviesingle/<int:id>/', views.moviesingle, name='moviesingle'),
     path('news/', views.news_list, name='news'),

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 
 #temporary 
 def base(request):
@@ -24,21 +25,43 @@ def index(request):
 
 
 # Movie list page
+# def movielist(request):
+#     movies = MovieTheater.objects.all()
+
+#     return render(request, 'movielist.html', {
+#         'movies': movies
+#     })
 def movielist(request):
-    movies = MovieTheater.objects.all()
+    theaters = MovieTheater.objects.all()
+    tvs = MovieTV.objects.all()
 
     return render(request, 'movielist.html', {
-        'movies': movies
+        'theaters': theaters,
+        'tvs': tvs,
     })
 
 
+
 # Single movie page
+# def moviesingle(request, id):
+#     movie = get_object_or_404(MovieTheater, id=id)
+
+#     return render(request, 'moviesingle.html', {
+#         'movie': movie
+#     })
 def moviesingle(request, id):
-    movie = get_object_or_404(MovieTheater, id=id)
+    movie = (
+        MovieTheater.objects.filter(id=id).first() or
+        MovieTV.objects.filter(id=id).first()
+    )
+
+    if not movie:
+        raise Http404("Movie not found")
 
     return render(request, 'moviesingle.html', {
         'movie': movie
     })
+
 
 
 # News page

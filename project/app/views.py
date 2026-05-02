@@ -2,6 +2,10 @@ from django.shortcuts import render
 from .models import *
 from django.shortcuts import get_object_or_404
 
+#temporary 
+def base(request):
+    return render(request, 'base.html')
+
 # Home page
 def index(request):
     sliders = Slider.objects.all()

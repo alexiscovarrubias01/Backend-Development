@@ -34,11 +34,14 @@ def index(request):
 def movielist(request):
     theaters = MovieTheater.objects.all()
     tvs = MovieTV.objects.all()
+    celebs = Celebrity.objects.all()
 
-    return render(request, 'movielist.html', {
-        'theaters': theaters,
-        'tvs': tvs,
+    return render(request, "movielist.html", {
+        "theaters": theaters,
+        "tvs": tvs,
+        "celebs": celebs,
     })
+
 
 
 

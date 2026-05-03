@@ -1,10 +1,11 @@
+{%load static %}
 <div class="latestnew">
 	<div class="container">
 		<div class="row ipad-width">
 			<div class="col-md-8">
 				<div class="ads">
 					<!-- DB -->
-					<img src="images/uploads/ads2.png" alt="" width="728" height="106">
+					<img src="{% static 'images/uploads/ads2.png' %}" alt="" width="{{ image_width }}" height="{{ image_height }}">
 				</div>
 				<div class="title-hd">
 					<h2>Latest news</h2>
@@ -15,12 +16,12 @@
 				            <div class="row">
 				            	<div class="blog-item-style-1">
 									<!-- DB -->
-				            		<img src="images/uploads/blog-it1.jpg" alt="" width="170" height="250">
+				            		<img src="{% static 'images/uploads/blog-it1.jpg' %}" alt="" width="{{ blog_image_width }}" height="{{ blog_image_height }}">
 				            		<div class="blog-it-infor">
 										<!-- DB -->
 				            			<h3><a href="#">Brie Larson to play first female white house candidate Victoria Woodull in Amazon film</a></h3>
 				            			<span class="time">13 hours ago</span>
-				            			<p>Exclusive: <span>Amazon Studios </span>has acquired Victoria Woodhull, with Oscar winning Room star <span>Brie Larson</span> polsed to produce, and play the first female candidate for the presidency of the United States. Amazon bought it in a pitch package deal. <span> Ben Kopit</span>, who wrote the Warner Bros film <span>Libertine</span> that has...</p>
+				            			<p>Exclusive: <span>Amazon Studios </span>has acquired Victoria Woodhull, with Oscar winning Room star <span>Brie Larson</span> polsed to produce, and play the first female candidate for the presidency of the United States. Amazon bought it in a pitch package deal. <span> Ben Kopit</span>, who wrote the Warner Bros film <span>Libertine</span> that has...
 				            		</div>
 				            	</div>
 				            </div>

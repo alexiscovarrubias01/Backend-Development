@@ -154,18 +154,21 @@
             <div class="col-md-4">
                 <div class="title-hd">
                     <h2>spotlight celebrities</h2>
-                    <a href="#" class="viewall">See all celebrities <i class="ion-ios-arrow-right"></i></a>
-                </div>
 
-                {% for celeb in celebs %}
-                <div class="celeb-item">
-                    <img src="{% static celeb.img_src %}" width="70" height="70">
-                    <div class="celeb-info">
-                        <h6>{{ celeb.name }}</h6>
-                        <p>{{ celeb.role }}</p>
-                    </div>
                 </div>
-                {% endfor %}
+                {% for celeb in celebs %}
+                    <div class="celeb-item">
+                        <img src="{% static celeb.celebrity_url %}" width="{{ celeb.img_width }}" height="{{ celeb.img_height }}">
+                        <div class="celeb-info">
+                            <h6>{{ celeb.celebrity_name }}</h6>
+                            <p>{{ celeb.celebrity_type }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                <a href="#" class="viewall">
+                    See all celebrities <i class="ion-ios-arrow-right"></i>
+                </a>
             </div>
 
         </div>

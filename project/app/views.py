@@ -14,6 +14,7 @@ def index(request):
     tvs = MovieTV.objects.all()
     news_items = News.objects.all()
     trailers = TrailerItem.objects.all()
+    celebs = Celebrity.objects.all()
 
     return render(request, 'index.html', {
         'sliders': sliders,
@@ -21,6 +22,7 @@ def index(request):
         'tvs': tvs,
         'news_items': news_items,
         'trailers': trailers,
+        'celebs': celebs,
     })
 
 
@@ -66,8 +68,8 @@ def news_list(request):
 
 # Trailers page
 def trailers(request):
-    trailer_items = TrailerItem.objects.all()
+    trailers = TrailerItem.objects.all()
 
     return render(request, 'trailers.html', {
-        'trailer_items': trailer_items
+        'trailers': trailers
     })

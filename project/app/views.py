@@ -1,63 +1,79 @@
-from django.shortcuts import render
-from .models import *
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 
-#temporary 
+from .models import (
+    Slider,
+    Movie,
+    News,
+    TrailerItem,
+    Celebrity
+)
+
+
+# BASE (TEMP)
 def base(request):
     return render(request, 'base.html')
 
-# Home page
+
+# HOME PAGE
 def index(request):
     sliders = Slider.objects.all()
-    theaters = MovieTheater.objects.all()
-    tvs = MovieTV.objects.all()
+
+    # FIX: split for template expectations
+    theaters = Movie.objects.filter(type="theater")
+    tvs = Movie.objects.filter(type="tv")
+
     news_items = News.objects.all()
     trailers = TrailerItem.objects.all()
     celebs = Celebrity.objects.all()
 
+    print("THEATERS:", theaters)
+    print("TVS:", tvs)
+
     return render(request, 'index.html', {
         'sliders': sliders,
-        'theaters': theaters,
-        'tvs': tvs,
+
+        # IMPORTANT: match template names
+        'popular_theaters': theaters,
+        'coming_theaters': theaters,
+
+        'popular_tvs': tvs,
+        'coming_tvs': tvs,
+
         'news_items': news_items,
         'trailers': trailers,
         'celebs': celebs,
     })
 
 
-# Movie list page
+# MOVIE LIST PAGE
 def movielist(request):
-    theaters = MovieTheater.objects.all()
-    tvs = MovieTV.objects.all()
+    theaters = Movie.objects.filter(type="theater")
+    tvs = Movie.objects.filter(type="tv")
     celebs = Celebrity.objects.all()
 
     return render(request, "movielist.html", {
-        "theaters": theaters,
-        "tvs": tvs,
+        # FIX: match template variables
+        "popular_theaters": theaters,
+        "coming_theaters": theaters,
+
+        "popular_tvs": tvs,
+        "coming_tvs": tvs,
+
         "celebs": celebs,
     })
 
 
-
-
-# Single movie page
+# SINGLE MOVIE PAGE
 def moviesingle(request, id):
-    movie = (
-        MovieTheater.objects.filter(id=id).first() or
-        MovieTV.objects.filter(id=id).first()
-    )
-
-    if not movie:
-        raise Http404("Movie not found")
+    movie = get_object_or_404(Movie, id=id)
 
     return render(request, 'moviesingle.html', {
         'movie': movie
     })
 
 
-
-# News page
+# NEWS PAGE
 def news_list(request):
     news_items = News.objects.all()
 
@@ -66,10 +82,10 @@ def news_list(request):
     })
 
 
-# Trailers page
-def trailers(request):
-    trailers = TrailerItem.objects.all()
+# TRAILERS PAGE
+def trailers_view(request):
+    trailers_list = TrailerItem.objects.all()
 
     return render(request, 'trailers.html', {
-        'trailers': trailers
+        'trailers': trailers_list
     })

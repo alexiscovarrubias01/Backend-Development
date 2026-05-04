@@ -87,31 +87,25 @@ class Tweet(models.Model):
         return self.content[:30]
     
 
-class MovieTheater(models.Model):
-    type = models.CharField(max_length=20)
+class Movie(models.Model):
+    TYPE_CHOICES = [
+        ("theater", "Theater"),
+        ("tv", "TV/Streaming"),
+    ]
+
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+
     image_src = models.CharField(max_length=200)
     image_width = models.IntegerField()
     image_height = models.IntegerField()
-    anchor_url = models.CharField(max_length=200)
-    movie_genre = models.CharField(max_length=10)
-    movie_title = models.CharField(max_length=20)
+
+    anchor_url = models.CharField(max_length=200,blank=True,null=True,default="Unknown")
+
+    movie_genre = models.CharField(max_length=30,blank=True,null=True,default="Unknown")
+    movie_title = models.CharField(max_length=100)
+
     lower_rating = models.CharField(max_length=5)
     upper_rating = models.CharField(max_length=5)
 
     def __str__(self):
-        return self.movie_title
-    
-
-class MovieTV(models.Model):
-    type = models.CharField(max_length=20)
-    img_src = models.CharField(max_length=200)
-    img_width = models.IntegerField()
-    img_height = models.IntegerField()
-    anchor_url = models.CharField(max_length=200)
-    movie_genre = models.CharField(max_length=10)
-    movie_title = models.CharField(max_length=20)
-    lower_rating = models.CharField(max_length=5)
-    upper_rating = models.CharField(max_length=5)
-
-    def __str__(self):
-        return self.movie_title
+        return f"{self.movie_title} ({self.type})"
